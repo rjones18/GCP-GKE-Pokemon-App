@@ -39,7 +39,7 @@ module "gke" {
       logging_variant           = "DEFAULT"
       auto_repair               = true
       auto_upgrade              = true
-      service_account           = "alert-flames-286515@appspot.gserviceaccount.com "
+      service_account           = "alert-flames-286515@appspot.gserviceaccount.com"
       preemptible               = false
       initial_node_count        = 80
     },
