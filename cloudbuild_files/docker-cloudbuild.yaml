@@ -3,7 +3,7 @@ steps:
 - name: gcr.io/alert-flames-286515/pythonbaseimage:v3
   entrypoint: python3
   args:
-  - test_app.py
+  - ./dockerbuild_image_code/test_app.py
 
 # Step 1: Build the Docker image
 - name: 'gcr.io/cloud-builders/docker'
