@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Pokémon Info</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <!-- Add a navbar -->
+    <nav class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand" href="/">👾 Pokémon Pokedex</a>
+    </nav>
+<!-- Update the HTML content with Bootstrap classes -->
+    <div class="container">
+        <h1 class="mb-4">Pokémon Pokedex</h1>
+        <img src="static/pokedex.jpg" alt="">
+        <form id="pokemon-form" class="form-inline">
+            <label class="mr-2" for="pokemon-name">Enter Pokémon Name:</label>
+            <input type="text" class="form-control mr-2" id="pokemon-name" name="pokemon-name" required>
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+        <div id="pokemon-info" class="mt-4" style="display:none;">            
+            <img id="sprite" src="" alt="Pokemon sprite" class="img-fluid mb-3">
+            <h2 id="name"></h2>
+            <p>Weight: <span id="weight"></span></p>
+            <p>Height: <span id="height"></span></p>
+            <p>Types: <span id="types"></span></p>
+            <p>Abilities: <span id="abilities"></span></p>
+            <div id="stats">  <!-- Add this div for stats -->
+                <h3>Stats:</h3>
+                <ul id="stats-list" class="list-unstyled"></ul>
+            </div>
+        </div>
+        <div id="error" class="mt-4 alert alert-danger" style="display:none;">
+            <p>Pokémon not found.</p>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+</body>
+</html>
