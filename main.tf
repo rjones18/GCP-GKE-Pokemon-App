@@ -3,6 +3,13 @@ resource "google_service_account" "default" {
   display_name = "gke-service-account"
 }
 
+resource "google_service_account_iam_member" "gcr_admin" {
+  service_account_id = google_service_account.default.id
+  role               = "roles/storage.objectAdmin"
+  member             = "serviceAccount:${google_service_account.default.email}"
+}
+
+
 resource "google_container_cluster" "primary" {
   name     = "my-gke-cluster"
   location = "us-central1"
