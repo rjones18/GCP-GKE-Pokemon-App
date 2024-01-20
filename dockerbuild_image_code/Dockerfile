@@ -1,6 +1,6 @@
-FROM python:3.7-slim
-COPY requirements.txt .
-RUN pip install -r requirements.txt
+FROM rjones21/pythonbaseimage:latest
+# COPY requirements.txt .
+# RUN pip install -r requirements.txt
 WORKDIR /myapp
 COPY main.py /myapp/main.py
 COPY templates/ /myapp/app/
