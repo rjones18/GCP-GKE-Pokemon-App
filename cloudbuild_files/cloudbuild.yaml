@@ -55,6 +55,22 @@ steps:
   - '-c'
   - terraform apply -auto-approve
 
+- id: 'Get Cluster Credentials'
+  name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  entrypoint: 'bash'
+  args: ['-c', 'gcloud container clusters get-credentials my-gke-cluster --zone us-central1-a']
+
+- id: 'Deploy GCR Image to Kubernetes Cluster'
+  name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  entrypoint: 'bash'
+  args: ['-c', 'kubectl apply -f pokemon-app-deployment.yaml']
+
+- id: 'Expose Deployment'
+  name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  entrypoint: 'bash'
+  args: ['-c', 'kubectl get svc pokedex-app || kubectl expose deployment pokedex-app --type=LoadBalancer --port 80 --target-port 8080']
+
+
 options:
   logging: CLOUD_LOGGING_ONLY
 timeout: 1600s
