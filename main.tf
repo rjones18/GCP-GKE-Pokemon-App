@@ -3,11 +3,14 @@ resource "google_service_account" "default" {
   display_name = "gke-service-account"
 }
 
-resource "google_service_account_iam_member" "gcr_admin" {
-  service_account_id = google_service_account.default.id
-  role               = "roles/storage.admin"
-  member             = "serviceAccount:${google_service_account.default.email}"
+resource "google_project_iam_binding" "gcr_bucket_access" {
+  project = "alert-flames-286515"  # Replace with your actual project ID
+  role    = "roles/storage.admin"  # Grants full control over GCR; adjust if needed
+  members = [
+    "serviceAccount:${google_service_account.default.email}",
+  ]
 }
+
 
 
 resource "google_container_cluster" "primary" {
