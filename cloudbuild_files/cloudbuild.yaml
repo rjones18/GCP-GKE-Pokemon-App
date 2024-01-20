@@ -58,7 +58,7 @@ steps:
 - id: 'Get Cluster Credentials'
   name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
   entrypoint: 'bash'
-  args: ['-c', 'gcloud container clusters get-credentials my-gke-cluster --zone us-central1-a']
+  args: ['-c', 'gcloud container clusters get-credentials my-gke-cluster --zone us-central1']
 
 - id: 'Deploy GCR Image to Kubernetes Cluster'
   name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
