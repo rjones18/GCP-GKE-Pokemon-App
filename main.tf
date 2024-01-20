@@ -5,7 +5,7 @@ resource "google_service_account" "default" {
 
 resource "google_service_account_iam_member" "gcr_admin" {
   service_account_id = google_service_account.default.id
-  role               = "roles/storage.objectAdmin"
+  role               = "roles/storage.admin"
   member             = "serviceAccount:${google_service_account.default.email}"
 }
 
