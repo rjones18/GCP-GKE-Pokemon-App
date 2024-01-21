@@ -1,9 +1,9 @@
-FROM rjones21/pythonbaseimage:latest
-# COPY requirements.txt .
-# RUN pip install -r requirements.txt
+FROM python:latest
+COPY requirements.txt .
+RUN pip install -r requirements.txt
 WORKDIR /myapp
 COPY main.py /myapp/main.py
-COPY templates/ /myapp/app/
-COPY static/ /myapp/app/
+COPY templates/ /myapp/templates
+COPY static/ /myapp/static
 CMD ["python", "/myapp/main.py"]
 
