@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: pokedex-app
-        image: gcr.io/alert-flames-286515/gke-pokemon-app:$SHORT_SHA
+        image: gcr.io/alert-flames-286515/gke-pokemon-app:v1
         ports:
         - containerPort: 8080
