@@ -14,19 +14,20 @@ steps:
 - name: 'gcr.io/cloud-builders/docker'
   args: ['push', 'gcr.io/$PROJECT_ID/gke-pokemon-app:$SHORT_SHA']
 
-# # Step 3: Deploy the Docker image to the existing Cloud Run service
-# - name: 'gcr.io/cloud-builders/gcloud'
-#   args:
-#   - run
-#   - deploy
-#   - golang-service
-#   - --image
-#   - gcr.io/$PROJECT_ID/simple-go-app:$SHORT_SHA
-#   - --region
-#   - us-central1
-#   - --platform
-#   - managed
-#   - --allow-unauthenticated
+- id: 'Get Cluster Credentials'
+  name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  entrypoint: 'bash'
+  args: ['-c', 'gcloud container clusters get-credentials my-gke-cluster --zone us-central1']
+
+- id: 'Deploy GCR Image to Kubernetes Cluster'
+  name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  entrypoint: 'bash'
+  args: ['-c', 'kubectl create deployment pokedex-app --image=gcr.io/alert-flames-286515/gke-pokemon-app:$SHORT_SHA --replicas=3 --port=8080 --labels=app=pokedex-app']
+
+- id: 'Expose Deployment'
+  name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  entrypoint: 'bash'
+  args: ['-c', 'kubectl get svc pokedex-app || kubectl expose deployment pokedex-app --type=LoadBalancer --port 80 --target-port 8080']
 
 # Set the images output for this build
 images:
