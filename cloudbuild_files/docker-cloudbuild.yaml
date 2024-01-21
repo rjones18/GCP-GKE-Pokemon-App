@@ -22,7 +22,7 @@ steps:
 - id: 'Deploy GCR Image to Kubernetes Cluster'
   name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
   entrypoint: 'bash'
-  args: ['-c', 'kubectl create deployment pokedex-app --image=gcr.io/alert-flames-286515/gke-pokemon-app:$SHORT_SHA --replicas=3 --port=8080']
+  args: ['-c', 'kubectl apply deployment pokedex-app --image=gcr.io/alert-flames-286515/gke-pokemon-app:$SHORT_SHA --replicas=3 --port=8080']
 
 - id: 'Expose Deployment'
   name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
