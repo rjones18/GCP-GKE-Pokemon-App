@@ -19,19 +19,21 @@ steps:
   entrypoint: 'bash'
   args: ['-c', 'gcloud container clusters get-credentials my-gke-cluster --zone us-central1']
 
-- name: 'docker.io/library/alpine'
-  entrypoint: 'sh'
+- name: 'cr.io/google.com/cloudsdktool/cloud-sdk'
+  entrypoint: 'bash'
   args:
-  - '-c'
-  - |
-    apk add --no-cache curl && \
-    curl -L https://get.zarf.dev | sh && \
-    zarf init # This line installs Zarf, ensuring it's the latest version from the official source.
+    - '-c'
+    - |
+      /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+      echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> /root/.profile
+      eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+      brew install kustomize
 
-# - id: 'Deploy GCR Image to Kubernetes Cluster'
-#   name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-#   entrypoint: 'bash'
-#   args: ['-c', 'kubectl apply -f pokemon-app-deployment.yaml']
+
+- id: 'Deploy GCR Image to Kubernetes Cluster'
+  name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  entrypoint: 'bash'
+  args: ['-c', 'kubectl apply -k kustomize']
 
 # - id: 'Expose Deployment'
 #   name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
@@ -41,9 +43,6 @@ steps:
 # Set the images output for this build
 images:
 - 'gcr.io/$PROJECT_ID/gke-pokemon-app:v1'
-
-
-
 
 options:
   logging : CLOUD_LOGGING_ONLY
