@@ -35,11 +35,6 @@ steps:
   entrypoint: 'bash'
   args: ['-c', 'kubectl apply -k kustomize']
 
-# - id: 'Expose Deployment'
-#   name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-#   entrypoint: 'bash'
-#   args: ['-c', 'kubectl get svc pokedex-app || kubectl expose deployment pokedex-app --type=LoadBalancer --port 80 --target-port 8080']
-
 # Set the images output for this build
 images:
 - 'gcr.io/$PROJECT_ID/gke-pokemon-app:v1'
