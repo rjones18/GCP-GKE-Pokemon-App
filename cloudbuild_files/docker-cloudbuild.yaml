@@ -19,15 +19,24 @@ steps:
   entrypoint: 'bash'
   args: ['-c', 'gcloud container clusters get-credentials my-gke-cluster --zone us-central1']
 
-- id: 'Deploy GCR Image to Kubernetes Cluster'
-  name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-  entrypoint: 'bash'
-  args: ['-c', 'kubectl apply -f pokemon-app-deployment.yaml']
+- name: 'docker.io/library/alpine'
+  entrypoint: 'sh'
+  args:
+  - '-c'
+  - |
+    apk add --no-cache curl && \
+    curl -L https://get.zarf.dev | sh && \
+    zarf init # This line installs Zarf, ensuring it's the latest version from the official source.
 
-- id: 'Expose Deployment'
-  name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-  entrypoint: 'bash'
-  args: ['-c', 'kubectl get svc pokedex-app || kubectl expose deployment pokedex-app --type=LoadBalancer --port 80 --target-port 8080']
+# - id: 'Deploy GCR Image to Kubernetes Cluster'
+#   name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+#   entrypoint: 'bash'
+#   args: ['-c', 'kubectl apply -f pokemon-app-deployment.yaml']
+
+# - id: 'Expose Deployment'
+#   name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+#   entrypoint: 'bash'
+#   args: ['-c', 'kubectl get svc pokedex-app || kubectl expose deployment pokedex-app --type=LoadBalancer --port 80 --target-port 8080']
 
 # Set the images output for this build
 images:
