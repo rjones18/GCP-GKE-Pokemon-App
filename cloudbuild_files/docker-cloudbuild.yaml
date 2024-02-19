@@ -19,7 +19,7 @@ steps:
   entrypoint: 'bash'
   args: ['-c', 'gcloud container clusters get-credentials my-gke-cluster --zone us-central1']
 
-- name: 'cr.io/google.com/cloudsdktool/cloud-sdk'
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
   entrypoint: 'bash'
   args:
     - '-c'
