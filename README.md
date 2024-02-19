@@ -12,4 +12,4 @@ Link to Website: http://pokemonpokedex.reggietestgcpdomain.com/ (Not currently d
 
 The Kubernetes Cluster is broken down into the architecture below:
 
-![kubernetespython](https://github.com/rjones18/Images/blob/main/KubernetesApp%20(3).png)
+![kubernetespython](https://github.com/rjones18/Images/blob/main/KubernetesApp%20(4).png)
