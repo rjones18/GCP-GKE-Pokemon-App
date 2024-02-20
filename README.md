@@ -6,7 +6,7 @@ To enhance the application's security, I integrated Snyk into the CI/CD pipeline
 
 Additionally, I assigned a custom domain name to the cluster using Google Domains, further enhancing the accessibility and professional appearance of the deployed application. This enhancement improved the application's credibility and overall user experience, making it an appealing and reliable resource for Pokémon enthusiasts.
 
-Link to Website: http://pokemonpokedex.reggietestgcpdomain.com/ (Not currently deployed)
+Link to Website: http://pokemonpokedex.reggietestgcpdomain.com/
 
 ## Architecture Breakdown
 
